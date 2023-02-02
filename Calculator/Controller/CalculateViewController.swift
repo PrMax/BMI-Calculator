@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
+    
+    var calculatorBrine = CalculatorBrine()
+    
+    
     
     //Label значений роста и веса
     @IBOutlet weak var labelHeight: UILabel!
@@ -43,10 +47,18 @@ class ViewController: UIViewController {
         //создаём константы со значенями
         let height = sliderHieght.value
         let weight = sliderWeight.value
-        //Вычисляем индекс веса
-        let bmi = weight / pow(height, 2)
+        
+        
+        calculatorBrine.calculateBMI(height: height, weight: weight)
+        self.performSegue(withIdentifier: "goToResult", sender: self)
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinationVC = segue.destination as! ResultViewController
+            destinationVC.bmiValue = calculatorBrine.getBMIValue()
+        }
+    }
 }
 
