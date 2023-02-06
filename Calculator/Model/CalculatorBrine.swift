@@ -21,7 +21,7 @@ struct CalculatorBrine {
         if bimValue < 18.5 {
             bim = BMI(value: bimValue, advice: "Eat more pies", color: UIColor.blue)
         } else if bimValue < 24.9 {
-            bim = BMI(value: bimValue, advice: "Fit as a fiddle!", color: UIColor.green)
+            bim = BMI(value: bimValue, advice: "You are perfect!", color: UIColor.green)
         } else {
             bim = BMI(value: bimValue, advice: "Eat less pies!", color: UIColor.red)
         }
