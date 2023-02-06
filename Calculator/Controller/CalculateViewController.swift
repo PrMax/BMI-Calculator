@@ -8,7 +8,7 @@
 import UIKit
 
 class CalculateViewController: UIViewController {
-    
+    //Создаём экземпляр структуры
     var calculatorBrine = CalculatorBrine()
     
     
@@ -17,16 +17,16 @@ class CalculateViewController: UIViewController {
     @IBOutlet weak var labelHeight: UILabel!
     @IBOutlet weak var labelWeight: UILabel!
     
-    //Слайдеры
+    //Слайдеры для задавания значении
     @IBOutlet weak var sliderHieght: UISlider!
     @IBOutlet weak var sliderWeight: UISlider!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
+    
     
     //Action slider
     @IBAction func changetSlaideHeight(_ sender: UISlider) {
@@ -44,12 +44,13 @@ class CalculateViewController: UIViewController {
     
     //Action Button
     @IBAction func presserCalculate(_ sender: UIButton) {
-        //создаём константы со значенями
+        //При нажатии кнопки, создаются константы со значенями
         let height = sliderHieght.value
         let weight = sliderWeight.value
         
-        
+        //Вызывается функция экземпляра класса, в которую мы пердаем знасения height и weight
         calculatorBrine.calculateBMI(height: height, weight: weight)
+        //Запускаем идентификатор "goToResult" для перехода к экрану "ResultViewController".
         self.performSegue(withIdentifier: "goToResult", sender: self)
         
     }
@@ -58,6 +59,8 @@ class CalculateViewController: UIViewController {
         if segue.identifier == "goToResult" {
             let destinationVC = segue.destination as! ResultViewController
             destinationVC.bmiValue = calculatorBrine.getBMIValue()
+            destinationVC.advice = calculatorBrine.getAdvice()
+            destinationVC.color = calculatorBrine.getColor()
         }
     }
 }
